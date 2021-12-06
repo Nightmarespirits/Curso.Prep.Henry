@@ -112,21 +112,32 @@ function numeroMasGrande(numeros) {
   // Tu código:
   let biger = 0;
     for(let num in numeros){
-      
+      if( num > biger){
+        biger = num;
+      }
     }
+    return biger;
 }
 
+let arr = [9,23,432,32,45,6,547,32]
 
 function multiplicarArgumentos() {
   // Usa la palabra clave `arguments` para multiplicar todos los argumentos y devolver el producto
   // Si no se pasan argumentos devuelve 0. Si se pasa un argumento, simplemente devuélvelo
   // Escribe tu código aquí:
+  let sum =0;
+  for( let arg of arguments){
+    sum+=arguments;
+  }
+  return sum;
+  
 }
 
 
 function cuentoElementos(arreglo){
   //Realiza una función que retorne la cantidad de los elementos del arreglo cuyo valor es mayor a 18.
   //Escribe tu código aquí
+  return arreglo.length;
 
 }
 
@@ -136,6 +147,11 @@ function diaDeLaSemana(numeroDeDia) {
   //Realiza una función que dado el número del día de la semana, retorne: Es fin de semana
   //si el día corresponde a Sábado o Domingo y “Es dia Laboral” en caso contrario. 
   //Escribe tu código aquí   
+  if(numeroDeDia == 6 && numeroDeDia == 7){
+    return 'Es fin de semana';
+  }else if(numeroDeDia > 1 && numeroDeDia < 5 ){
+  }
+  return 'Es un dia laboral';
   
 } 
 
@@ -144,7 +160,11 @@ function empiezaConNueve(n) {
   //Desarrolle una función que recibe como parámetro un número entero n. Debe retornar true si el entero 
   //inicia con 9 y false en otro caso.
   //Escribe tu código aquí
-  
+  if(n[0] === 9){
+    return true;
+  }else{
+    return false;
+  }
 }
 
 
@@ -152,15 +172,38 @@ function todosIguales(arreglo) {
   //Escriba la función todosIguales, que indique si todos los elementos de un arreglo son iguales:
   //retornar true, caso contrario retornar false.
   //Escribe tu código aquí  
-  
+  let counter = 1;
+  for(let elem of arreglo){
+    if(counter >= arreglo.length){
+      break;
+    }else if(elem == arreglo[counter]){
+      
+      counter++;
+    }else{
+      return false;
+    }
+  }
+  if(counter == arreglo.length){
+    return true;
+  }
+
 } 
-
-
+let myArr = [4,4,4,1];
+console.log(todosIguales(myArr));
 function mesesDelAño(array) {
   //Dado un array que contiene algunos meses del año desordenados, recorrer el array buscando los meses de 
   // "Enero", "Marzo" y "Noviembre", guardarlo en nuevo array y retornarlo.
   //Si alguno de los meses no está, devolver: "No se encontraron los meses pedidos"
   // Tu código:
+  let other =[];
+  for(let elem of array){
+    if(elem == "Enero" || elem == "Marzo" || elem == "Noviembre"){
+      other.push(elem);
+    }else{
+      return "No se encontraron los meses pedidos";
+    }
+  }
+  return other;
 }
 
 
