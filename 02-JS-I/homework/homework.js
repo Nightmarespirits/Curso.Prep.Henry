@@ -247,7 +247,7 @@ function esVocal(letra){
     let vocales = ['a', 'e', 'i', 'o','u'];
     for(let i = 0; i < vocales.lenght; i++){
       if(letra === vocales[i]){
-        return 'Es una vocal'
+        return 'Es una vocal';
       }
     }
   }

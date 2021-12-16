@@ -1,5 +1,7 @@
 // No cambies los nombres de las funciones.
 
+const { resetTask } = require("simple-git/src/lib/tasks/reset");
+
 function devolverPrimerElemento(array) {
   // Devuelve el primer elemento de un  array (pasado por parametro)
   // Tu código:
@@ -10,7 +12,8 @@ function devolverPrimerElemento(array) {
 function devolverUltimoElemento(array) {
   // Devuelve el último elemento de un array
   // Tu código:
-  return array[-1];
+  
+  return array[array.length -1];
 }
 
 
@@ -27,10 +30,11 @@ function incrementarPorUno(array) {
   // y devuelve el array
   // Tu código:
   let newArr = [];
-    for( let elem of array){
-      elem++
-      newArr.push(elem);
-    };
+  for( let elem of array){
+    elem = elem +1 ;
+    newArr.push(elem);
+  };
+  return newArr;
 }
 
 function agregarItemAlFinalDelArray(array, elemento) {
@@ -38,6 +42,7 @@ function agregarItemAlFinalDelArray(array, elemento) {
   // y devuelve el array
   // Tu código:
   array.push(elemento);
+  return array;
 }
 
 
@@ -47,6 +52,7 @@ function agregarItemAlComienzoDelArray(array, elemento) {
   // Pista: usa el método `.unshift`
   // Tu código:
   array.unshift(elemento);
+  return array;
 }
 
 
@@ -56,10 +62,7 @@ function dePalabrasAFrase(palabras) {
   // con espacios entre cada palabra
   // Ejemplo: ['Hello', 'world!'] -> 'Hello world!'
   // Tu código:
-  let str = "";
-  for(let palabra of palabras){
-    str +=  palabra ;
-  }
+ let str =  palabras.join(" ")
   return str;
 }
 
@@ -68,15 +71,13 @@ function arrayContiene(array, elemento) {
   // Comprueba si el elemento existe dentro de "array"
   // Devuelve "true" si está, o "false" si no está
   // Tu código:
-  for( let elem of array){
-    if(elemento == elem){
+  for( var i = 0; i < array.length; i++){
+    if(array[i] === elemento){
       return true;
     }
-    else{
-      return false;
-    }
   }
-
+      return false;
+    
 }
 
 
@@ -85,8 +86,8 @@ function agregarNumeros(numeros) {
   // "numeros" debe ser un arreglo de enteros (int/integers)
   // Suma todos los enteros y devuelve el valor
   // Tu código:
-  let sum = 0;
-  for(let num in numeros){
+  var sum = 0;
+  for(var num of numeros){
     sum += num;
   }
   return sum;
@@ -110,57 +111,68 @@ function numeroMasGrande(numeros) {
   // "numeros" debe ser una matriz de enteros (int/integers)
   // Devuelve el número más grande
   // Tu código:
-  let biger = 0;
-    for(let num in numeros){
-      if( num > biger){
-        biger = num;
+  let biger = numeros[0];
+    for(let i = 1; i < numeros.length ; i++){
+      if( numeros[i] > biger){
+        biger = numeros[i];
       }
     }
     return biger;
 }
 
-let arr = [9,23,432,32,45,6,547,32]
 
 function multiplicarArgumentos() {
   // Usa la palabra clave `arguments` para multiplicar todos los argumentos y devolver el producto
   // Si no se pasan argumentos devuelve 0. Si se pasa un argumento, simplemente devuélvelo
   // Escribe tu código aquí:
-  let sum =0;
-  for( let arg of arguments){
-    sum+=arguments;
-  }
-  return sum;
   
+  if(arguments.length == 0){
+    return 0;
+  }else{
+    var result = 1;
+    for( var i = 0; i < arguments.length; i++){
+      result = result * arguments[i];     
+    }
+    return result;
+  }
+
 }
 
 
 function cuentoElementos(arreglo){
   //Realiza una función que retorne la cantidad de los elementos del arreglo cuyo valor es mayor a 18.
   //Escribe tu código aquí
-  return arreglo.length;
+  var elementos = 0;
+  for(let i = 0; i< arreglo.length; i++){
+    if(arreglo[i] > 18){
+      elementos +=1;
+    }
+  }
+  return elementos;
 
 }
 
 
 function diaDeLaSemana(numeroDeDia) {
-  //Suponga que los días de la semana se codifican como 1 = Domingo, 2 = Lunes y así sucesivamente. 
+  //Suponga que los días de la semana se codifican como 1 = Domingo, 2 = Lunes y así sucesivamente.
   //Realiza una función que dado el número del día de la semana, retorne: Es fin de semana
-  //si el día corresponde a Sábado o Domingo y “Es dia Laboral” en caso contrario. 
-  //Escribe tu código aquí   
-  if(numeroDeDia == 6 && numeroDeDia == 7){
+  //si el día corresponde a Sábado o Domingo y “Es dia Laboral” en caso contrario.
+  //Escribe tu código aquí
+  if(numeroDeDia === 1 || numeroDeDia === 7){
     return 'Es fin de semana';
-  }else if(numeroDeDia > 1 && numeroDeDia < 5 ){
+  }else {
+    return "Es dia Laboral";
   }
-  return 'Es un dia laboral';
-  
-} 
+
+}
 
 
 function empiezaConNueve(n) {
-  //Desarrolle una función que recibe como parámetro un número entero n. Debe retornar true si el entero 
+  //Desarrolle una función que recibe como parámetro un número entero n. Debe retornar true si el entero
   //inicia con 9 y false en otro caso.
   //Escribe tu código aquí
-  if(n[0] === 9){
+  var str = n.toString();
+  if(str[0] === "9"){
     return true;
   }else{
     return false;
@@ -171,27 +183,16 @@ function empiezaConNueve(n) {
 function todosIguales(arreglo) {
   //Escriba la función todosIguales, que indique si todos los elementos de un arreglo son iguales:
   //retornar true, caso contrario retornar false.
-  //Escribe tu código aquí  
-  let counter = 1;
-  for(let elem of arreglo){
-    if(counter >= arreglo.length){
-      break;
-    }else if(elem == arreglo[counter]){
-      
-      counter++;
-    }else{
+  //Escribe tu código aquí
+  for(var i = 1; i < arreglo.length; i++){
+    if(arreglo[0] != arreglo[i]){
       return false;
     }
   }
-  if(counter == arreglo.length){
-    return true;
-  }
-
-} 
-let myArr = [4,4,4,1];
-console.log(todosIguales(myArr));
+  return true;
+}
 function mesesDelAño(array) {
-  //Dado un array que contiene algunos meses del año desordenados, recorrer el array buscando los meses de 
+  //Dado un array que contiene algunos meses del año desordenados, recorrer el array buscando los meses de
   // "Enero", "Marzo" y "Noviembre", guardarlo en nuevo array y retornarlo.
   //Si alguno de los meses no está, devolver: "No se encontraron los meses pedidos"
   // Tu código:
@@ -199,9 +200,10 @@ function mesesDelAño(array) {
   for(let elem of array){
     if(elem == "Enero" || elem == "Marzo" || elem == "Noviembre"){
       other.push(elem);
-    }else{
-      return "No se encontraron los meses pedidos";
     }
+  }
+  if (other.length < 3){
+    return "No se encontraron los meses pedidos";
   }
   return other;
 }
@@ -211,27 +213,60 @@ function mayorACien(array) {
   //La función recibe un array con enteros entre 0 y 200. Recorrer el array y guardar en un nuevo array sólo los
   //valores mayores a 100 (no incluye el 100). Finalmente devolver el nuevo array.
   // Tu código:
+  let returnArr = [];
+  for(let elem of array){
+    if(elem > 100){
+      returnArr.push(elem);
+    }
+  }
+  return returnArr;
 }
 
 
 function breakStatement(numero) {
   //Iterar en un bucle aumentando en 2 el numero recibido hasta un límite de 10 veces.
-  //Guardar cada nuevo valor en un array. 
+  //Guardar cada nuevo valor en un array.
   //Devolver el array
-  //Si en algún momento el valor de la suma y la cantidad de iteraciones coinciden, debe interrumpirse la ejecución y 
+  //Si en algún momento el valor de la suma y la cantidad de iteraciones coinciden, debe interrumpirse la ejecución y
   //devolver: "Se interrumpió la ejecución"
   //Pista: usá el statement 'break'
   // Tu código:
+  let numbers =[];
+  for(var i = 0; i < 10; i++){
+    numero += 2;
+    numbers.push(numero);
+    if(numero === i){
+      break;
+    }
+  }
+  
+  if (i < 10){
+    return "Se interrumpió la ejecución";
+  }else{
+    return numbers;
+  }
 }
 
 
 function continueStatement(numero) {
   //Iterar en un bucle aumentando en 2 el numero recibido hasta un límite de 10 veces.
-  //Guardar cada nuevo valor en un array.    
+  //Guardar cada nuevo valor en un array.
   //Devolver el array
   //Cuando el número de iteraciones alcance el valor 5, no se suma en ese caso y se continua con la siguiente iteración
   //Pista: usá el statement 'continue'
   // Tu código:
+  let numbers =[];
+  for(let i = 0; i < 10; i++){
+    
+    if(i === 5){
+      continue;
+    }else{
+      numero = numero + 2;
+      numbers.push(numero);
+    }
+  }
+
+  return numbers;
 }
 
 
